@@ -1,5 +1,5 @@
-from trees.Tree import Tree
-from lists.SinglyLinkedList import SinglyLinkedList
+from trees import Tree
+from lists import SinglyLinkedList, DoublyLinkedList
 
 
 def make_tree():
@@ -24,5 +24,16 @@ def linked_list():
     singly_linked.print_list()
 
 
+def doubly_linked_list():
+    doubly_linked = DoublyLinkedList()
+    doubly_linked.insert(32)
+    doubly_linked.insert(34)
+    doubly_linked.insert(45)
+    doubly_linked.insert(47)
+    doubly_linked.insert(87)
+
+    doubly_linked.print_list()
+
+
 if __name__ == '__main__':
-    linked_list()
+    doubly_linked_list()

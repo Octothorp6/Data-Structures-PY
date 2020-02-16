@@ -1,1 +1,2 @@
-from lists import SinglyLinkedList, DoublyLinkedList
+from lists.SinglyLinkedList import SinglyLinkedList
+from lists.DoublyLinkedList import DoublyLinkedList
