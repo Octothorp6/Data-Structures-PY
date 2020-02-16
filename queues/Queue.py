@@ -12,6 +12,8 @@ class Queue:
             raise Exception("The queue is empty.")
 
         removed = self.queue.pop(0)
+        self.back -= 1
+
         if self.is_empty():
             self.back = 0
 

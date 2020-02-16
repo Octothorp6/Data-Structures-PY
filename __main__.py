@@ -2,6 +2,7 @@ from trees import Tree
 from lists import SinglyLinkedList, DoublyLinkedList
 from stacks import Stack, LinkedStack
 from queues import Queue
+from heaps import Heap
 
 
 def make_tree():
@@ -58,5 +59,17 @@ def make_queue():
     queue.print_queue()
 
 
+def max_heap():
+    heap = Heap()
+    heap.insert(23)
+    heap.insert(45)
+    heap.insert(32)
+    heap.insert(27)
+    heap.insert(36)
+    heap.insert(74)
+
+    heap.print_heap()
+
+
 if __name__ == '__main__':
-    make_queue()
+    max_heap()
