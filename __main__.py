@@ -1,5 +1,6 @@
 from trees import Tree
 from lists import SinglyLinkedList, DoublyLinkedList
+from stacks import Stack, LinkedStack
 
 
 def make_tree():
@@ -35,5 +36,15 @@ def doubly_linked_list():
     doubly_linked.print_list()
 
 
+def make_stack():
+    stack = Stack()
+    stack.push(23)
+    stack.push(35)
+    stack.push(56)
+    stack.push(32)
+
+    stack.print_stack()
+
+
 if __name__ == '__main__':
-    doubly_linked_list()
+    make_stack()
