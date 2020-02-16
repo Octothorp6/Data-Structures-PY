@@ -48,13 +48,13 @@ class TreeNode:
         if self.left_child is not None:
             self.left_child.traverse_in_order()
 
-        print(self.data + ", ")
+        print(self.data, ", ")
 
         if self.right_child is not None:
             self.right_child.traverse_in_order()
 
     def traverse_pre_order(self):
-        print(self.data + ", ")
+        print(self.data, ", ")
 
         if self.left_child is not None:
             self.left_child.traverse_pre_order()
@@ -69,4 +69,4 @@ class TreeNode:
         if self.left_child is not None:
             self.left_child.traverse_post_order()
 
-        print(self.data + ", ")
+        print(self.data, ", ")
