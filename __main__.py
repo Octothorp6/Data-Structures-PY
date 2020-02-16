@@ -1,6 +1,7 @@
 from trees import Tree
 from lists import SinglyLinkedList, DoublyLinkedList
 from stacks import Stack, LinkedStack
+from queues import Queue
 
 
 def make_tree():
@@ -46,5 +47,16 @@ def make_stack():
     stack.print_stack()
 
 
+def make_queue():
+    queue = Queue()
+    queue.add(23)
+    queue.add(45)
+    queue.add(58)
+    queue.add(34)
+    queue.add(45)
+
+    queue.print_queue()
+
+
 if __name__ == '__main__':
-    make_stack()
+    make_queue()
