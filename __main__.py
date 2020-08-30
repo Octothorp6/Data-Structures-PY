@@ -1,8 +1,8 @@
-from trees import Tree
+from trees import BinarySearchTree
 from lists import SinglyLinkedList, DoublyLinkedList
 from stacks import Stack, LinkedStack
 from queues import Queue
-from heaps import Heap
+from heaps import BinaryHeap
 
 
 def make_tree():
@@ -60,7 +60,7 @@ def make_queue():
 
 
 def max_heap():
-    heap = Heap()
+    heap = BinaryHeap()
     heap.insert(23)
     heap.insert(45)
     heap.insert(32)

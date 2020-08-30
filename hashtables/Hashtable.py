@@ -1,87 +1,79 @@
+class HashTable(object):
+    """"
+    HashTable(): Create a new, empty map. It returns an empty map collection.
+    put(key,val): Add a new key-value pair to the map. If the key is already in the map,
+    then replace the old value with the new value.
+    get(key): Given a key, return the value stored in the map or None otherwise.
+    len(): Return the number of key-value pairs stored in the map
+    in:  Return True for a statement of the form key in map, if the given key is in the map, False otherwise.
+    """
+    def __init__(self, total):
+        self.size = total
+        self.slots = [None] * total
+        self.data = [None] * total
 
-class HashEntry:
-    def __init__(self, key, value):
-        self.key = key
-        self.value = value
+    def put(self, key, data):
+        hash_value = self.hash_function(key, len(self.slots))
 
-    def __repr__(self):
-        return "HashEntry { Key: {0}, Value: {1} }".format(self.key, self.value)
-
-
-class Hashtable:
-    def __init__(self):
-        self.table = []
-
-    def occupied(self, index: int):
-        return self.table[index] is not None
-
-    def hash_key(self, key: str):
-        return abs(hash(key)) % len(self.table)
-
-    @staticmethod
-    def test_key(key, length):
-        if key == length - 1:
-            key = 0
+        # if slot is empty
+        if self.slots[hash_value] is None:
+            self.slots[hash_value] = key
+            self.data[hash_value] = data
         else:
-            key += 1
-        return key
+            # If data already exists in that slot, replace old value
+            if self.slots[hash_value] == key:
+                self.data[hash__value] = data
 
-    # will search for the index of the key
-    def find_key(self, key: str):
-        hashed_key = self.hash_key(key)
-        if (self.table[hashed_key] is not None) and (self.table[hashed_key].key != key):
-            return hashed_key
+            # Otherwise, find the next available slot
+            next_slot = self.rehash(hash_value, len(self.slots))
 
-        stop_index = hashed_key
+            # get to the next slot
+            while self.slots[next_slot] is not None and self.slots[next_slot] != key:
+                next_slot = self.rehash(next_slot, len(self.slots))
 
-        hashed_key = self.test_key(hashed_key, len(self.table))
+                # set new key, if None
+                if self.slots[next_slot] is None:
+                    self.slots[next_slot] = key
+                    self.data[next_slot] = data
+                else:
+                    # Otherwise replace old value
+                    self.data[next_slot] = data
 
-        while (hashed_key != stop_index) and (self.table[hashed_key] is not None) and (
-                self.table[hashed_key].key != key):
-            hashed_key = (hashed_key + 1) % len(self.table)
+    def hash_function(self, key, size):
+        return key % size
 
-        # if stop_index == hashedKey, then we've looked at the entire table and did not find the value
-        if stop_index == hashed_key:
-            return - 1
+    def rehash(self, old_hash, size):
+        return (old_hash + 1) % size
+
+    def get(self, key):
+        # Retrieving items based on a given key
+
+        start_slot = self.hash_function(key, len(self.slots))
+        data = None
+        stop = False
+        found = False
+        position = start_slot
+
+        # Until we confirm that it is not empty or found
+        while self.slots[position] is not None and not found and not stop:
+            if self.slots[position] == key:
+                found = True
+                data = self.data[position]
+            else:
+                position = self.rehash(position, len(self.slots))
+                if position == start_slot:
+                    stop = True
+        return data
+
+    # Special Methods for Python indexing
+    def __getitem__(self, key):
+        return self.get(key)
+
+    def __setitem__(self, key, data):
+        self.put(key, data)
+
+    def __contains__(self, key):
+        if self.get(key):
+            return True
         else:
-            return hashed_key
-
-    def put(self, key: str, value):
-        hashed_key = self.hash_key(key)
-        if self.occupied(hashed_key):
-            stop_index = hashed_key
-            hashed_key = self.test_key(hashed_key, len(self.table))
-
-            # perform linear probing until we find an empty spot to enter our
-            while self.occupied(hashed_key) and hashed_key != stop_index:
-                hashed_key = (hashed_key + 1) % len(self.table)
-
-        self.table[hashed_key] = HashEntry(key, value)
-
-    def get(self, key: str):
-        hashed_key = self.find_key(key)
-        if hashed_key == -1:
-            return None
-
-        return self.table[hashed_key]
-
-    def remove(self, key: str):
-        hashed_key = self.find_key(key)
-        if hashed_key == -1:
-            return None
-
-        value = self.table[hashed_key].value
-        self.table[hashed_key] = None
-
-        old_table = self.table
-        self.table = []
-
-        for i in range(len(old_table)):
-            if old_table[i] is not None:
-                self.put(old_table[i].key, old_table[i].value)
-
-        return value
-
-    def print_table(self):
-        for i in range(len(self.table)):
-            print(self.table[i])
+            return False

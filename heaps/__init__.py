@@ -1,1 +1,1 @@
-from heaps.Heap import Heap
+from . import BinaryHeap

@@ -1,72 +1,42 @@
 class TreeNode:
-    def __init__(self, data):
-        self.data = data
-        self.left_child = None
-        self.right_child = None
+    def __init__(self, key, payload, left=None, right=None, parent=None):
+        self.key = key
+        self.payload = payload
+        self.left_child = left
+        self.right_child = right
+        self.parent = parent
 
-    def insert(self, value):
-        if value == self.data:
-            return
+    def has_left_child(self):
+        return self.left_child
 
-        if value < self.data:
-            if self.left_child is None:
-                self.left_child = TreeNode(value)
-            else:
-                self.left_child.insert(value)
-        else:
-            if self.right_child is None:
-                self.right_child = TreeNode(value)
-            else:
-                self.right_child.insert(value)
+    def has_right_child(self):
+        return self.right_child
 
-    def get(self, value):
-        if value == self.data:
-            return self
+    def is_left_child(self):
+        return self.parent and self.parent.left_child == self
 
-        if value < self.data:
-            if self.left_child is not None:
-                return self.left_child.get(value)
-        else:
-            if self.right_child is not None:
-                return self.right_child.get(value)
+    def is_right_child(self):
+        return self.parent and self.parent.right_child == self
 
-        return
+    def is_root(self):
+        return not self.parent
 
-    def min(self):
-        if self.left_child is None:
-            return self.data
-        else:
-            return self.left_child.min()
+    def is_leaf(self):
+        return not (self.right_child or self.left_child)
 
-    def max(self):
-        if self.right_child is None:
-            return self.data
-        else:
-            return self.right_child.max()
+    def has_any_children(self):
+        return self.right_child or self.left_child
 
-    def traverse_in_order(self):
-        if self.left_child is not None:
-            self.left_child.traverse_in_order()
+    def has_both_children(self):
+        return self.right_child and self.left_child
 
-        print(self.data, end=", ")
+    def replace_node_data(self, key, value, lc, rc):
+        self.key = key
+        self.payload = value
+        self.left_child = lc
+        self.right_child = rc
+        if self.has_left_child():
+            self.left_child.parent = self
+        if self.has_right_child():
+            self.right_child.parent = self
 
-        if self.right_child is not None:
-            self.right_child.traverse_in_order()
-
-    def traverse_pre_order(self):
-        print(self.data, end=", ")
-
-        if self.left_child is not None:
-            self.left_child.traverse_pre_order()
-
-        if self.right_child is not None:
-            self.right_child.traverse_pre_order()
-
-    def traverse_post_order(self):
-        if self.right_child is not None:
-            self.right_child.traverse_post_order()
-
-        if self.left_child is not None:
-            self.left_child.traverse_post_order()
-
-        print(self.data, end=", ")
