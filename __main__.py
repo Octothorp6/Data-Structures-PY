@@ -6,16 +6,13 @@ from heaps import BinaryHeap
 
 
 def make_tree():
-    tree = Tree()
-    tree.insert(50)
-    tree.insert(60)
-    tree.insert(30)
-    tree.insert(25)
-    tree.insert(27)
-    tree.insert(71)
-    tree.insert(66)
+    tree = BinarySearchTree()
+    tree.put("mak", 50)
+    tree.put("bop", 60)
+    tree.put("sdd", 34)
+    tree.put("elo", 36)
 
-    tree.traverse_in_order()
+    print(tree.length())
 
 
 def linked_list():
@@ -45,21 +42,21 @@ def make_stack():
     stack.push(56)
     stack.push(32)
 
-    stack.print_stack()
+    print(f"Stack: {stack.items}")
 
 
 def make_queue():
     queue = Queue()
-    queue.add(23)
-    queue.add(45)
-    queue.add(58)
-    queue.add(34)
-    queue.add(45)
+    queue.enqueue(23)
+    queue.enqueue(45)
+    queue.enqueue(58)
+    queue.enqueue(34)
+    queue.enqueue(45)
 
-    queue.print_queue()
+    print(f"Queue: {queue.items}")
 
 
-def max_heap():
+def make_heap():
     heap = BinaryHeap()
     heap.insert(23)
     heap.insert(45)
@@ -68,8 +65,12 @@ def max_heap():
     heap.insert(36)
     heap.insert(74)
 
-    heap.print_heap()
+    print(f"Heap: {heap.heap_list}")
 
 
 if __name__ == '__main__':
-    max_heap()
+    linked_list()
+    doubly_linked_list()
+    make_queue()
+    make_heap()
+    make_tree()

@@ -1,1 +1,1 @@
-from queues.Queue import Queue
+from .Queue import Queue

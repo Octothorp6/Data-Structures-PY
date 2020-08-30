@@ -1,1 +1,2 @@
-from . import BinarySearchTree, BinaryTree, TreeNode
+from .BinarySearchTree import BinarySearchTree
+from .BinaryTree import BinaryTree

@@ -1,12 +1,12 @@
-class BinaryHeap(object):
+class BinaryHeap:
     """
-    BinaryHeap() creates a new, empty, binary heap.
-    insert(k) adds a new item to the heap.
-    findMin() returns the item with the minimum key value, leaving item in the heap.
-    delMin() returns the item with the minimum key value, removing the item from the heap.
-    isEmpty() returns true if the heap is empty, false otherwise.
-    size() returns the number of items in the heap.
-    buildHeap(list) builds a new heap from a list of keys.
+    - BinaryHeap(): creates a new, empty, binary heap.
+    - insert(k): adds a new item to the heap.
+    - findMin(): returns the item with the minimum key value, leaving item in the heap.
+    - delMin(): returns the item with the minimum key value, removing the item from the heap.
+    - isEmpty(): returns true if the heap is empty, false otherwise.
+    - size(): returns the number of items in the heap.
+    - buildHeap(list): builds a new heap from a list of keys.
     """
     def __init__(self):
         self.heap_list = [0]
@@ -41,7 +41,7 @@ class BinaryHeap(object):
                 return (i * 2) + 1
 
     def insert(self, k):
-        self.heapList.append(k)
+        self.heap_list.append(k)
         self.current_size += 1
         self.__perc_up(self.current_size)
 
@@ -60,7 +60,7 @@ class BinaryHeap(object):
         self.heap_list = [0] + elements[:]
         while i > 0:
             self.__perc_down(i)
-            i = i - 1
+            i -= 1
 
     def size(self):
         return self.current_size
